@@ -51,31 +51,18 @@ namespace Grocery.App.ViewModels {
 
         [RelayCommand]
         public void AddProduct(Product product) {
-            if (AvailableProducts.Contains(product) && product.Id > 0) {
-                GroceryListItem editedItem = MyGroceryListItems.FirstOrDefault(x => x.ProductId == product.Id);
-                if (editedItem != null)
-                {
-                    editedItem.Amount += 1;
-                    _groceryListItemsService.Update(editedItem);
+            if (!AvailableProducts.Contains(product) || product.Id <= 0) return;
+            GroceryListItem editedItem = MyGroceryListItems.FirstOrDefault(x => x.ProductId == product.Id) ?? throw new InvalidOperationException();
+            editedItem.Amount += 1;
+            _groceryListItemsService.Update(editedItem);
 
-                    Product? editProduct = _productService.Get(product.Id);
-                    if (editProduct == null)
-                        throw new NullReferenceException();
-                    editProduct.Stock -= 1;
-                    _productService.Update(editProduct);
+            Product? editProduct = _productService.Get(product.Id);
+            if (editProduct == null)
+                throw new NullReferenceException();
+            editProduct.Stock -= 1;
+            _productService.Update(editProduct);
 
-                    Load(groceryList.Id);
-                }
-
-
-            }
-            //Controleer of het product bestaat en dat de Id > 0
-            //Maak een GroceryListItem met Id 0 en vul de juiste productid en grocerylistid
-            //Voeg het GroceryListItem toe aan de dataset middels de _groceryListItemsService
-
-            //Werk de voorraad (Stock) van het product bij en zorg dat deze wordt vastgelegd (middels _productService)
-            //Werk de lijst AvailableProducts bij, want dit product is niet meer beschikbaar
-            //call OnGroceryListChanged(GroceryList);
+            Load(groceryList.Id);
         }
     }
 }
