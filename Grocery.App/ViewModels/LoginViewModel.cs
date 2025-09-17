@@ -26,20 +26,20 @@ namespace Grocery.App.ViewModels
             _global = global;
         }
 
-        [RelayCommand]
-        private void Login()
-        {
-            Client? authenticatedClient = _authService.Login(Email, Password);
-            if (authenticatedClient != null)
-            {
-                LoginMessage = $"Welkom {authenticatedClient.Name}!";
-                _global.Client = authenticatedClient;
-                Application.Current.MainPage = new AppShell();
-            }
-            else
-            {
-                LoginMessage = "Ongeldige inloggegevens.";
-            }
-        }
+        //[RelayCommand]
+        //private void Login(string Email, string Password)
+        //{
+        //    Client? authenticatedClient = _authService.Login(Email, Password);
+        //    if (authenticatedClient != null)
+        //    {
+        //        LoginMessage = $"Welkom {authenticatedClient.Name}!";
+        //        _global.Client = authenticatedClient;
+        //        Application.Current.MainPage = new AppShell();
+        //    }
+        //    else
+        //    {
+        //        LoginMessage = "Ongeldige inloggegevens.";
+        //    }
+        //}
     }
 }
