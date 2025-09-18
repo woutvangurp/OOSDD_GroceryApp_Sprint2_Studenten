@@ -1,6 +1,7 @@
 ﻿
 using Grocery.Core.Interfaces.Repositories;
 using Grocery.Core.Models;
+using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace Grocery.Core.Data.Repositories
 {
@@ -19,12 +20,14 @@ namespace Grocery.Core.Data.Repositories
 
         public Client? Get(string email)
         {
-            return clientList[0];
+            Client? getClient = clientList.FirstOrDefault(c => c._emailAddress == email);
+            return getClient ?? null;
         }
 
         public Client? Get(int id)
         {
-            return clientList[0];
+            Client? getClient = clientList.FirstOrDefault(c => c.Id == id);
+            return getClient ?? null;
         }
 
         public List<Client> GetAll()
