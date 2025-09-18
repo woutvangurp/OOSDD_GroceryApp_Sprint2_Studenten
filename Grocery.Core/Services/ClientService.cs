@@ -17,20 +17,8 @@ namespace Grocery.Core.Services
             _clientRepository = clientRepository;
         }
         
-        public Client? Get(string email)
-        {
-            return _clientRepository.Get(email);
-        }
-
-        public Client? Get(int id)
-        {
-            return _clientRepository.Get(id);
-        }
-
-        public List<Client> GetAll()
-        {
-            List<Client> clients = _clientRepository.GetAll();
-            return clients;
-        }
+        public Client? Get(string email) => _clientRepository.Get(email);
+        public Client? Get(int id) => _clientRepository.Get(id);
+        public List<Client> GetAll() => _clientRepository.GetAll();
     }
 }
