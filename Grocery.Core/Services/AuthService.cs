@@ -13,7 +13,8 @@ namespace Grocery.Core.Services
         }
         public Client? Login(string email, string password)
         {
-            Client logClient = _clientService.Get(email) ?? throw new NullReferenceException(nameof(email));
+            Client? logClient = _clientService.Get(email);
+            if (logClient == null) return null;
             bool verified = PasswordHelper.VerifyPassword(password, logClient._password);
             return verified 
                 ? new Client(logClient.Id, logClient.name, logClient._emailAddress, "") 
